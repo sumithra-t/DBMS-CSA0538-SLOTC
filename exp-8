@@ -1,0 +1,79 @@
+mysql> create database assessment;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use assessment;
+Database changed
+mysql> create table assessment(register_no int,name varchar(12),course_no varchar(4),marks int,faculty_id varchar(4),assessment int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into assessment values(192111238,'sumi','c001',90,'2002',2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assessment values(192111239,'sangi','c001',90,'2002',1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into assessment values(192111240,'sai','c001',65,'2001',2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from assessment;
++-------------+-------+-----------+-------+------------+------------+
+| register_no | name  | course_no | marks | faculty_id | assessment |
++-------------+-------+-----------+-------+------------+------------+
+|   192111238 | sumi  | c001      |    90 | 2002       |          2 |
+|   192111239 | sangi | c001      |    90 | 2002       |          1 |
+|   192111240 | sai   | c001      |    65 | 2001       |          2 |
++-------------+-------+-----------+-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select register_no,name,marks from assessment  where marks=(select max(high_score) from (select register_no,name ,max(marks) as high_score from assessment order by high_score) as high_score);
++-------------+-------+-------+
+| register_no | name  | marks |
++-------------+-------+-------+
+|   192111238 | sumi  |    90 |
+|   192111239 | sangi |    90 |
++-------------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from assessment;
++-------------+-------+-----------+-------+------------+------------+
+| register_no | name  | course_no | marks | faculty_id | assessment |
++-------------+-------+-----------+-------+------------+------------+
+|   192111238 | sumi  | c001      |    90 | 2002       |          2 |
+|   192111239 | sangi | c001      |    90 | 2002       |          1 |
+|   192111240 | sai   | c001      |    65 | 2001       |          2 |
++-------------+-------+-----------+-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select register_no,name,max(mycount) from(select register_no,name,count(assessment) as mycount from assessment group by register_no) as max_count;
++-------------+------+--------------+
+| register_no | name | max(mycount) |
++-------------+------+--------------+
+|   192111238 | sumi |            1 |
++-------------+------+--------------+
+1 row in set (0.00 sec)
+
+mysql> use faculty;
+Database changed
+
+mysql> select*from fal;
+Empty set (0.00 sec)
+
+mysql> use assessment;
+Database changed
+mysql> select * from assessment;
++-------------+-------+-----------+-------+------------+------------+
+| register_no | name  | course_no | marks | faculty_id | assessment |
++-------------+-------+-----------+-------+------------+------------+
+|   192111238 | sumi  | c001      |    90 | 2002       |          2 |
+|   192111239 | sangi | c001      |    90 | 2002       |          1 |
+|   192111240 | sai   | c001      |    65 | 2001       |          2 |
++-------------+-------+-----------+-------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select course_no,marks,avg(marks) from assessment where marks > (select avg(marks) from assessment);
++-----------+-------+------------+
+| course_no | marks | avg(marks) |
++-----------+-------+------------+
+| c001      |    90 |    90.0000 |
++-----------+-------+------------+
+1 row in set (0.00 sec)
