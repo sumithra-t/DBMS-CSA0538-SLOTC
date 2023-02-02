@@ -1,14 +1,14 @@
-mysql> use sse;
+mysql> use student;
 Database changed
 
 mysql> select*from mentees;
 +-----------+---------+------+---------+------------+
 | Regno     | Name    | Dept | Address | Fathername |
 +-----------+---------+------+---------+------------+
-| 192011090 | Gowtham | CSE  | Erode   | moorthi    |
-| 192011079 | arun    | CSE  | nellore | muthu      |
-| 192011095 | Harish  | ECE  | Madurai | Kannan     |
-| 192011080 | Harini  | ECE  | Tanjore | Velu       |
+| 192011090 | sumi    | CSE  | Erode   | moorthi    |
+| 192011079 | riyaz   | CSE  | nellore | muthu      |
+| 192011095 | keerthi | ECE  | Madurai | Kannan     |
+| 192011080 |deepa    | ECE  | Tanjore | Velu       |
 | 192211080 | Dhivya  | ECE  | Tirupur | Ramesh     |
 +-----------+---------+------+---------+------------+
 5 rows in set (0.00 sec)
